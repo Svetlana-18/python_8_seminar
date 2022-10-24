@@ -15,5 +15,5 @@ def add_contact(data, columns):
         flag = False
 
 
-def input_column():
-    return input("Введите имя нового столбца базы данных: ")
+# def input_column():
+#     return input("Введите имя нового столбца базы данных: ")

@@ -1,6 +1,6 @@
 from contacts_op import get_columns
-from input_data import add_contact, input_column
-from contacts_op import find_contact, read_data, add_column, write_data, del_contact
+from input_data import add_contact
+from contacts_op import find_contact, read_data, add_column, write_data, izm_contact, del_contact
 
 
 def user_interface():
@@ -13,8 +13,8 @@ def user_interface():
             print("1 - Найти сотрудника")
             print("2 - Добавить сотрудника")
             print("3 - Показать список всех сотрудников")
-            print("4 - Добавить столбец в базу данных")
-            print("5 - Удалить запись о сотдунике")
+            print("4 - Изменить данные в записи о сотруднике")
+            print("5 - Удалить запись о сотруднике")
             print("6 - Выход")
             choice = input()
             if choice not in ["1", "2", "3", "4", "5", "6"]:
@@ -30,8 +30,7 @@ def user_interface():
                 print(columns)
                 print(data)
             elif choice == "4":
-                column = input_column()
-                data = add_column(data, column, columns)
+                 izm_contact(data)
             elif choice == "5":
                 del_contact(data)
                 break

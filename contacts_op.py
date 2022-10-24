@@ -1,6 +1,6 @@
 from os.path import exists
 from os import remove
-
+from datetime import datetime as dt
 
 def write_contact(user, data):
     data.append(user)
@@ -25,6 +25,7 @@ def add_column(data, column, columns):
 
 
 def read_data():
+    time = dt.now().strftime('%H')
     valid = exists(FILE_NAME)
     if not valid:
         return []
@@ -34,17 +35,15 @@ def read_data():
         if "\n" not in data:
             return []
         print(data.split("\n"))
-        columns = data.split("\n")[0].strip().split(
-            ", ")  # строка с заголовком
+        columns = data.split("\n")[0].strip().split(", ")
         print("\n")
-        data = [{columns[i]: user.strip().split(", ")[i] if user else "" for i in range(
-            len(columns))} for user in data.split("\n")[1:] if user]
+        data = [{columns[i]: user.strip().split(", ")[i] if user else "" for i in range(len(columns))} for user in data.split("\n")[1:] if user .format(time,data)]
         return data
 
 
 def get_columns(data):
     if not data:
-        return ["Фамилия", "Имя", "Отчество", "Должность", "Номер телефона"]
+        return ["Фамилия", "Имя", "Отчество", "Должность", "Номер телефона", "Номер приказа о приеме на работу"]
     columns = list(data[0].keys())
     print(columns)
     return columns
@@ -73,6 +72,21 @@ def del_contact(data):
             return "Такого столбца нет!"
         elif user[column] == val:
             data.remove(user)
+        flag = True
+    if not flag:
+        print("Данные не найдены!")
+
+
+def izm_contact(data):
+    column = input("Введите столбец поиска: ")
+    val = input("Введите значение для поиска: ")
+    flag = False
+    for user in data:
+        if column not in user:
+            return "Такого столбца нет!"
+        elif user[column] == val:
+            val1 = input("Введите новое значение: ")
+            user[column] = val1
         flag = True
     if not flag:
         print("Данные не найдены!")
